@@ -37,7 +37,7 @@ np.set_printoptions(threshold=np.nan)
 class Network:
     IMAGE_HEIGHT = 128
     IMAGE_WIDTH = 128
-    IMAGE_CHANNELS = 1
+    IMAGE_CHANNELS = 3
 
     def __init__(self, layers=None, per_image_standardization=True, batch_norm=True, skip_connections=True):
         # Define network - ENCODER (decoder will be symmetric).
@@ -112,7 +112,7 @@ class Dataset:
         self.include_hair = include_hair
 
         train_files, validation_files, test_files = self.train_valid_test_split(
-            os.listdir(os.path.join(folder, 'inputs')))
+            os.listdir(os.path.join(folder, 'inputs_ori')))
 
         self.train_inputs, self.train_targets = self.file_paths_to_images(folder, train_files)
         self.test_inputs, self.test_targets = self.file_paths_to_images(folder, test_files, True)
@@ -124,10 +124,10 @@ class Dataset:
         targets = []
 
         for file in files_list:
-            input_image = os.path.join(folder, 'inputs', file)
-            target_image = os.path.join(folder, 'targets' if self.include_hair else 'targets_face_only', file)
+            input_image = os.path.join(folder, 'inputs_ori', file)
+            target_image = os.path.join(folder, 'targets' if self.include_hair else 'targets', file)
 
-            test_image = np.array(cv2.imread(input_image, 0))  # load grayscale
+            test_image = np.array(cv2.imread(input_image, cv2.IMREAD_COLOR))  # load grayscale
             # test_image = np.multiply(test_image, 1.0 / 255)
             inputs.append(test_image)
 
