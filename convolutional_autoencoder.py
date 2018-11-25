@@ -205,7 +205,7 @@ def draw_results(test_inputs, test_targets, test_segmentation, test_accuracy, ne
 
 
 def train():
-    BATCH_SIZE = 100
+    BATCH_SIZE = 30
 
     network = Network()
 
@@ -285,7 +285,7 @@ def train():
                                                                           n_epochs * dataset.num_batches_in_epoch(),
                                                                           epoch_i, cost, end - start))
 
-                if batch_num % 10 == 0 or batch_num == n_epochs * dataset.num_batches_in_epoch():
+                if batch_num % 50 == 0 or batch_num == n_epochs * dataset.num_batches_in_epoch():
                     test_inputs, test_targets = dataset.test_set
                     # test_inputs, test_targets = test_inputs[:100], test_targets[:100]
 
