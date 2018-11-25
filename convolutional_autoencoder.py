@@ -268,7 +268,7 @@ def train():
                 start = time.time()
                 batch_inputs, batch_targets = dataset.next_batch()
                 batch_inputs = np.reshape(batch_inputs,
-                                          (dataset.batch_size, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 1))
+                                          (dataset.batch_size, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 3))
                 batch_targets = np.reshape(batch_targets,
                                            (dataset.batch_size, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 1))
 
