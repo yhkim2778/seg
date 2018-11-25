@@ -269,7 +269,7 @@ def train():
                 batch_inputs = np.reshape(batch_inputs,
                                           (dataset.batch_size, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 3))
                 batch_targets = np.reshape(batch_targets,
-                                           (dataset.batch_size, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 1))
+                                           (dataset.batch_size, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 3))
 
                 batch_inputs = augmentation_seq_deterministic.augment_images(batch_inputs)
                 batch_inputs = np.multiply(batch_inputs, 1.0 / 255)
