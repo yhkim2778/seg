@@ -128,6 +128,7 @@ class Dataset:
             target_image = os.path.join(folder, 'targets' if self.include_hair else 'targets', file)
 
             test_image = np.array(cv2.imread(input_image, cv2.IMREAD_COLOR))  # load grayscale
+            test_image = cv2.resize(test_image, (128,128), interpolation = cv2.INTER_AREA)
             # test_image = np.multiply(test_image, 1.0 / 255)
             inputs.append(test_image)
 
@@ -205,7 +206,7 @@ def draw_results(test_inputs, test_targets, test_segmentation, test_accuracy, ne
 
 
 def train():
-    BATCH_SIZE = 30
+    BATCH_SIZE = 100
 
     network = Network()
 
