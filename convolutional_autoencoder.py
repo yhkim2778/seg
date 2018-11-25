@@ -182,16 +182,14 @@ def draw_results(test_inputs, test_targets, test_segmentation, test_accuracy, ne
     fig.suptitle("Accuracy: {}, {}".format(test_accuracy, network.description), fontsize=20)
     for example_i in range(n_examples_to_plot):
         axs[0][example_i].imshow(test_inputs[example_i])
-        axs[1][example_i].imshow(test_targets[example_i].astype(np.float32), cmap='gray')
+        axs[1][example_i].imshow(test_targets[example_i].astype(np.float32))
         axs[2][example_i].imshow(
-            np.reshape(test_segmentation[example_i], [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]),
-            cmap='gray')
+            np.reshape(test_segmentation[example_i], [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]))
 
         test_image_thresholded = np.array(
             [0 if x < 0.5 else 255 for x in test_segmentation[example_i].flatten()])
         axs[3][example_i].imshow(
-            np.reshape(test_image_thresholded, [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]),
-            cmap='gray')
+            np.reshape(test_image_thresholded, [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]))
 
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
@@ -291,7 +289,7 @@ def train():
                     # test_inputs, test_targets = test_inputs[:100], test_targets[:100]
 
                     test_inputs = np.reshape(test_inputs, (-1, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 3))
-                    test_targets = np.reshape(test_targets, (-1, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 1))
+                    test_targets = np.reshape(test_targets, (-1, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 3))
                     test_inputs = np.multiply(test_inputs, 1.0 / 255)
 
                     print(test_inputs.shape)
