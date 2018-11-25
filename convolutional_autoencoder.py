@@ -58,7 +58,7 @@ class Network:
 
         self.inputs = tf.placeholder(tf.float32, [None, self.IMAGE_HEIGHT, self.IMAGE_WIDTH, self.IMAGE_CHANNELS],
                                      name='inputs')
-        self.targets = tf.placeholder(tf.float32, [None, self.IMAGE_HEIGHT, self.IMAGE_WIDTH, 1], name='targets')
+        self.targets = tf.placeholder(tf.float32, [None, self.IMAGE_HEIGHT, self.IMAGE_WIDTH, 3], name='targets')
         self.is_training = tf.placeholder_with_default(False, [], name='is_training')
         self.description = ""
 
@@ -132,7 +132,7 @@ class Dataset:
             # test_image = np.multiply(test_image, 1.0 / 255)
             inputs.append(test_image)
 
-            target_image = cv2.imread(target_image, 0)
+            target_image = cv2.imread(target_image, cv2.IMREAD_COLOR)
             target_image = cv2.threshold(target_image, 127, 1, cv2.THRESH_BINARY)[1]
             targets.append(target_image)
 
