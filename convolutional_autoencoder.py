@@ -184,8 +184,7 @@ def draw_results(test_inputs, test_targets, test_segmentation, test_accuracy, ne
         axs[0][example_i].imshow(test_inputs[example_i])
         axs[1][example_i].imshow(test_targets[example_i].astype(np.float32), cmap='gray')
         axs[2][example_i].imshow(
-            np.reshape(test_segmentation[example_i], [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]),
-            cmap='gray')
+            np.reshape(test_segmentation[example_i], [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]))
 
         test_image_thresholded = np.array(
             [0 if x < 0.5 else 255 for x in test_segmentation[example_i].flatten()])
