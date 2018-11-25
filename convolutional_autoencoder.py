@@ -316,7 +316,7 @@ def train():
 
                     test_segmentation = sess.run(network.segmentation_result, feed_dict={
                         network.inputs: np.reshape(test_inputs,
-                                                   [n_examples, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 1])})
+                                                   [n_examples, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 3])})
 
                     # Prepare the plot
                     test_plot_buf = draw_results(test_inputs, test_targets, test_segmentation, test_accuracy, network,
