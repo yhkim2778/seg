@@ -184,7 +184,8 @@ def draw_results(test_inputs, test_targets, test_segmentation, test_accuracy, ne
         axs[0][example_i].imshow(test_inputs[example_i])
         axs[1][example_i].imshow(test_targets[example_i].astype(np.float32), cmap='gray')
         axs[2][example_i].imshow(
-            np.reshape(test_segmentation[example_i], [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]))
+            np.reshape(test_segmentation[example_i], [network.IMAGE_HEIGHT, network.IMAGE_WIDTH]),
+            cmap='gray')
 
         test_image_thresholded = np.array(
             [0 if x < 0.5 else 255 for x in test_segmentation[example_i].flatten()])
@@ -315,7 +316,7 @@ def train():
 
                     test_segmentation = sess.run(network.segmentation_result, feed_dict={
                         network.inputs: np.reshape(test_inputs,
-                                                   [n_examples, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 3])})
+                                                   [n_examples, network.IMAGE_HEIGHT, network.IMAGE_WIDTH, 1])})
 
                     # Prepare the plot
                     test_plot_buf = draw_results(test_inputs, test_targets, test_segmentation, test_accuracy, network,
